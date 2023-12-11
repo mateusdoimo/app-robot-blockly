@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <title>ROBÔ COM BLOCOS</title>
+    <link rel="stylesheet" href="./fonts/OpenSans/stylesheet.css">
+    <link rel="stylesheet" href="./fonts/MaterialSymbols/material-symbols.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="icon" type="image/png" href="./img/icon.png" />
+</head>
+
+<body>
+    <div class="modal-alert">
+        <div class="box-modal-alert">
+            <div class="title-box-modal-alert">
+                <span class="material-symbols-rounded">
+                    warning
+                </span>
+            </div>
+            <div class="mensagem-alert"></div>
+            <div class="btn-box-modal-alert">
+                <button class="pushable btn-warning" onclick="closeModalAlert()">
+                    <span class="front">
+                        <span>OK</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="puzzleContainer">
+        <?xml version="1.0" encoding="utf-8"?>
+        <svg version="1.1" id="puzzle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="224 -224 512 512" style="enable-background:new 224 -224 512 512;"
+            xml:space="preserve">
+
+            <path id="br" class="st0 piece" d="M660,17c0-33-27-60-60-60c-33,0-60,27-60,60c0,5.1,0.6,10.2,1.8,15H525h-45v61.9
+    	c4.9-1.2,9.9-1.9,15-1.9c33.1,0,60,26.9,60,60s-26.9,60-60,60c-5.1,0-10.1-0.6-15-1.9V288h211c24.9,0,45-20.1,45-45V32h-77.8
+    	C659.4,27.2,660,22.1,660,17z" />
+            <path id="bl" class="st1 piece" d="M495,212c33.1,0,60-26.9,60-60s-26.9-60-60-60c-5.1,0-10.1,0.6-15,1.9V32h-15h-46.9
+    	c1.2,4.9,1.9,9.9,1.9,15c0,33.1-26.9,60-60,60s-60-26.9-60-60c0-5.1,0.6-10.1,1.9-15H224v211c0,24.9,20.1,45,45,45h196h15v-77.9
+    	C484.9,211.4,489.9,212,495,212z" />
+            <path id="tl" class="st2 piece" d="M300,47c0,33.1,26.9,60,60,60s60-26.9,60-60c0-5.1-0.6-10.1-1.9-15H465h15v-61.8
+    	c-4.8,1.2-9.9,1.8-15,1.8c-33,0-60-27-60-60c0-33,27-60,60-60c5.1,0,10.2,0.6,15,1.8V-224H269c-24.9,0-45,20.1-45,45V32h77.9
+    	C300.6,36.9,300,41.9,300,47z" />
+            <path id="tr" class="st3 piece" d="M691-224H525h-45v77.8c-4.8-1.2-9.9-1.8-15-1.8c-33,0-60,27-60,60c0,33,27,60,60,60
+    	c5.1,0,10.2-0.6,15-1.8V32h45h16.8c-1.2-4.8-1.8-9.9-1.8-15c0-33,27-60,60-60c33,0,60,27,60,60c0,5.1-0.6,10.2-1.8,15H736v-211
+    	C736-203.9,715.9-224,691-224z" />
+        </svg>
+    </div>
+    <main id="blocklyMain">
+        <header id="blocklyHeader">
+            <div>
+
+            </div>
+
+            <div>
+                <button class="pushable btn-warning btn-conectar-wifi">
+                    <span class="front">
+                        <span class="material-symbols-rounded">wifi_find</span>
+                        <span>CONECTAR</span>
+                    </span>
+                </button>
+
+                <!-- <button class="pushable btn-enviar btn-enviar-code">
+                    <span class="front">
+                        <span class="material-symbols-rounded">send</span>
+                        <span>ENVIAR</span>
+                    </span>
+                </button> -->
+
+                <div class="btns-status-pronto">
+                    <button class="pushable btn-error btn-reset-code">
+                        <span class="front">
+                            <span class="material-symbols-outlined">
+                                refresh
+                            </span>
+                            <span>RESETAR</span>
+                        </span>
+                    </button>
+
+                    <button class="pushable btn-executa-codigo">
+                        <span class="front">
+                            <span class="material-symbols-rounded" style="font-variation-settings: 'FILL' 1;">
+                                star
+                            </span>
+                            <span>ENVIAR</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <section>
+            <div id="blocklyDiv"></div>
+            <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+                <block id="iniciarBlock" type="iniciar"></block>
+                <block type="avancar"></block>
+                <block type="retornar"></block>
+                <!-- <block type="parar"></block> -->
+                <block type="virar"></block>
+                <block type="buzina"></block>
+                <block type="delay"></block>
+
+                <block type="repetir"></block>
+                <!-- <block type="loop"></block> -->
+                <block type="condicao"></block>
+                <block type="operadores"></block>
+                <block type="distancia"></block>
+                <block type="numero"></block>
+            </xml>
+        </section>
+        <footer id="blocklyFooter" class="status-desconectado">
+            <div id="status-conectado" class="status-conect status-off">
+                <span class="material-symbols-rounded">wifi</span>
+                CONECTADO
+            </div>
+            <div id="status-desconectado" class="status-conect">
+                <span class="material-symbols-rounded">wifi_off</span>
+                DESCONECTADO
+            </div>
+        </footer>
+    </main>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="./js/tweenMax.min.js"></script>
+    <script src="./js/loading.js"></script>
+    <script src="./js/status.js"></script>
+    <script src="./js/ws.js"></script>
+    <script>
+        function modalAlert(mensagem) {
+            tl.pause();
+            $("#puzzleContainer").css('display', 'none')
+
+            $('.mensagem-alert').text(mensagem)
+            $('.modal-alert').css('display', 'flex');
+        }
+        function closeModalAlert() {
+            $('.modal-alert').css('display', 'none');
+            $('.mensagem-alert').text('')
+        }
+        async function verificaConexao() {
+            const wifiConectado = await window.api.wifiConectado()
+            if (wifiConectado) {
+                const wifiEncontrada = wifiConectado.find(wifi => wifi.ssid === "ROBO-ESP32");
+
+                if (wifiEncontrada) {
+                    connectWebSocket();
+                }
+                else {
+                    statusDesconectar()
+                }
+            }
+            else {
+                statusDesconectar()
+            }
+        }
+
+        function enviaMensagemSocket(mensagem) {
+            if (socket && socket.readyState) {
+                socket.send(JSON.stringify(mensagem));
+            }
+        }
+
+        $(document).ready(async function () {
+
+            verificaConexao()
+
+            $(document).on('click', '.btn-conectar-wifi', async () => {
+                tl.resume();
+                $("#puzzleContainer").css('display', 'flex')
+                const statusWifi = await window.api.connectToWiFi()
+                if (!statusWifi) {
+                    modalAlert('Não foi encontrado o robô. Tente novamente!')
+                }
+                else {
+                    verificaConexao()
+                }
+            })
+
+            // $(document).on('click', '.btn-enviar-code', async () => {
+            //     var codigoGerado = Blockly.JavaScript.workspaceToCode(workspace);
+            //     codigoGerado = codigoGerado.substring(0, codigoGerado.length - 1);
+            //     const numeroWords = codigoGerado.split(',');
+            //     console.log(codigoGerado)
+            //     console.log(numeroWords.length)
+            //     enviaMensagemSocket({
+            //         tipo: 2,
+            //         codigo: codigoGerado,
+            //         tamanho: numeroWords.length
+            //     })
+            // })
+
+            $(document).on('click', '.btn-reset-code', async () => {
+                enviaMensagemSocket({
+                    tipo: 4,
+                })
+            })
+
+            $(document).on('click', '.btn-executa-codigo', async () => {
+                let flag = -1;
+
+                let codigoGerado = Blockly.JavaScript.workspaceToCode(workspace);
+                codigoGerado = codigoGerado.split(/\r?\n/)
+
+                for (let index = 0; index < codigoGerado.length; index++) {
+                    const element = codigoGerado[index];
+                    if (element.includes('99,')) {
+                        flag = index;
+                    }
+                }
+
+                if (flag == -1) {
+                    modalAlert('Não adicionado o bloco de INICIAR!')
+                }
+                else {
+                    console.log(codigoGerado[flag])
+                    codigoGerado = codigoGerado[flag].substring(0, codigoGerado[flag].length - 1);
+                    const numeroWords = codigoGerado.split(',');
+                    console.log(codigoGerado)
+                    console.log(numeroWords.length)
+
+
+                    enviaMensagemSocket({
+                        tipo: 2,
+                        codigo: codigoGerado,
+                        tamanho: numeroWords.length
+                    })
+
+                    enviaMensagemSocket({
+                        tipo: 3,
+                    })
+                }
+            })
+
+        });
+    </script>
+    <script src="blockly/package/blockly_compressed.js"></script>
+
+    <script src="blockly/package/javascript_compressed.js"></script>
+    <script src="blockly/package/blocks_compressed.js"></script>
+
+    <script src="blockly/package/msg/pt-br.js"></script>
+    <script src="blockly/robo.js"></script>
+    <script src="blockly/robo-code.js"></script>
+    <script>
+        var workspace;
+        // Função para inicializar o Blockly
+        function initBlockly() {
+            // Cria um novo Blockly Workspace
+            workspace = Blockly.inject('blocklyDiv', {
+                media: 'blockly/package/media/',
+                zoom: {
+                    startScale: 1.1,
+                },
+                trashcan: true,
+                toolbox: document.getElementById('toolbox') // Elemento HTML que contém as categorias de blocos
+            });
+
+            workspace.addChangeListener(function (event) {
+                var workspace = Blockly.getMainWorkspace();
+                var contador = 0;
+
+                // Percorre todos os blocos no workspace
+                var blocks = workspace.getAllBlocks();
+                for (var i = 0; i < blocks.length; i++) {
+                    var block = blocks[i];
+                    // Verifica se o bloco é do tipo "MeuBloco"
+                    if (block.type === "iniciar") {
+                        contador++;
+
+                    }
+                    if (contador > 1) {
+                        block.dispose();
+                    }
+                }
+
+                if (contador > 0) {
+                    $("#iniciarBlock").attr('disabled', true)
+                    workspace.updateToolbox(document.getElementById('toolbox'));
+                }
+                else {
+                    $("#iniciarBlock").attr('disabled', false)
+                    workspace.updateToolbox(document.getElementById('toolbox'));
+                }
+            });
+
+            return workspace;
+        }
+
+        function getJavaScriptCode() {
+
+            var codigoGerado = Blockly.JavaScript.workspaceToCode(workspace);
+
+            // O código gerado está armazenado em 'codigoGerado'
+            console.log(codigoGerado);
+
+            // blocks = workspace.getTopBlocks(true);
+            // Blockly.JavaScript.init(workspace);
+
+            // var code = [];
+            // var comments = [];
+            // for (var b = 0; b < blocks.length; b++) {
+            //     var block = blocks[b];
+            //     //console.log(block.type);
+            //     var blockCode = Blockly.JavaScript.blockToCode(block);
+            //     if (["procedures_defnoreturn", "procedures_defreturn"].indexOf(block.type) > -1) {
+            //         // For function blocks, the code is stored in Blockly.JavaScript.definitions_
+            //     } else {
+            //         comments.push(blockCode);
+            //     }
+            // }
+            // for (var def in Blockly.JavaScript.definitions_) {
+            //     code.push(Blockly.JavaScript.definitions_[def]);
+            // }
+
+            // var code = code.join("\n");
+            // code += 'i,' + comments + 'f';
+
+            // //var retorno = code.split(",");
+            // console.log(code)
+            //return code;
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Inicializa o Blockly
+            var workspace = initBlockly();
+
+            // Exporta a variável 'workspace' para ser acessada globalmente
+            window.workspace = workspace;
+
+            function resizeBlockly() {
+                var blocklyDiv = document.getElementById('blocklyDiv');
+                var blocklyMain = document.getElementById('blocklyMain');
+                var blocklyHeader = document.getElementById('blocklyHeader');
+                var blocklyFooter = document.getElementById('blocklyFooter');
+                blocklyDiv.style.width = blocklyMain.offsetWidth + 'px';
+                blocklyDiv.style.height = blocklyMain.offsetHeight - blocklyHeader.offsetHeight - blocklyFooter.offsetHeight + 'px';
+                Blockly.svgResize(workspace);
+            }
+
+            // Redimensione o Blockly quando a janela for redimensionada
+            window.addEventListener('resize', resizeBlockly);
+            resizeBlockly();
+
+            const filePath = await window.api.openFile()
+            console.log(filePath)
+
+        })
+    </script>
+</body>
+
+</html>

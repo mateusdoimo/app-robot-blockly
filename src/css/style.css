@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    font-family: 'Open Sans';
+}
+
+#blocklyArea {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+body {
+    background-color: #ddd;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 16px 12px;
+    border-bottom: 2px solid #ccc;
+}
+
+section {
+    display: flex;
+}
+
+footer {
+    background-color: #238d38;
+    padding: 2px 16px;
+    display: flex;
+}
+
+.btn-conectar {
+    display: flex;
+}
+
+.pushable {
+    background: #238d38;
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+}
+
+.pushable:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* .pushable:disabled,
+.pushable[disabled] {
+    background-color: #57c56c;
+}
+
+.pushable:disabled .front,
+.pushable[disabled] .front {
+    background-color: #67d17b;
+    cursor: no-drop;
+}
+
+.pushable:disabled:active .front {
+    transform: translateY(-6px);
+} */
+
+.front {
+    display: flex;
+    justify-content: center;
+    padding: 6px 20px;
+    border-radius: 13px;
+    font-size: 14px;
+    background: #36a74c;
+    color: #fff;
+    transform: translateY(-5px);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.front span:nth-child(1) {
+    margin-right: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.front span:nth-child(2) {
+    margin-left: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.pushable:active .front {
+    transform: translateY(-2px);
+}
+
+.btn-warning {
+    background: #0277BD;
+}
+
+.btn-warning .front {
+    background: #039BE5;
+}
+
+.btn-enviar {
+    background: #eb6f2c;
+}
+
+.btn-enviar .front {
+    background: #F57F17;
+}
+
+.btn-enviar :disabled,
+.btn-enviar[disabled] {
+    background-color: #ffa85b !important;
+}
+
+.btn-enviar :disabled .front,
+.btn-enviar[disabled] .front {
+    background-color: #ffbe85 !important;
+    cursor: no-drop;
+}
+
+.btn-enviar:disabled:active .front {
+    transform: translateY(-6px);
+}
+
+.btn-error {
+    background: #881414;
+}
+
+.btn-error .front {
+    background: #c42222;
+}
+
+.status-conect {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+}
+
+.status-conect span {
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.btn-enviar-code {
+    display: none;
+}
+
+.status-desconectado {
+    background: #c42222;
+}
+
+.status-off {
+    display: none;
+}
+
+.modal-alert {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.71);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.71);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-modal-alert {
+    background-color: #fff;
+    width: 300px;
+    border: 2px solid #ccc;
+    padding: 16px;
+    border-radius: 6px;
+    border-bottom: 4px solid #ccc;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.title-box-modal-alert {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.title-box-modal-alert p {
+    font-weight: 600;
+}
+
+.title-box-modal-alert span {
+    font-size: 32px;
+}
+
+.btn-box-modal-alert button {
+    width: 100%;
+}
+
+.mensagem-alert {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btns-status-pronto {
+    margin-right: 5px;
+    display: none;
+}
+
+.btn-reset-code {
+    margin-right: 5px;
+}
+
+button.pushable.btn-reset-code:disabled {
+    background: #e46d6d;
+    cursor: no-drop;
+}
+
+button.pushable.btn-reset-code:disabled .front {
+    background: #ec8080;
+}
+
+button.pushable.btn-executa-codigo:disabled {
+    background: #54bd69;
+    cursor: no-drop;
+}
+
+button.pushable.btn-executa-codigo:disabled .front {
+    background: #92bd9a;
+}
