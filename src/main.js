@@ -91,7 +91,7 @@ const createWindow = () => {
         autoHideMenuBar: true,
     })
 
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 
     const iconPath = path.join(__dirname, 'img/puzzle.ico'); // Substitua 'seu-icone.ico' pelo nome do seu ícone
     mainWindow.setIcon(iconPath);
