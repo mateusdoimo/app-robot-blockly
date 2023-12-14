@@ -4,20 +4,22 @@ O nosso projeto visa criar um ambiente de aprendizagem acessível e de baixo cus
 
 ## Instalação
 
-Para começar, faça o download do executável da aplicação na pasta `/dist`. Este executável permite iniciar o ambiente de aprendizagem sem a necessidade de instalações complexas. Siga as instruções abaixo para configurar e utilizar o sistema:
+Para começar, baixe o executável da aplicação a partir da distribuição no GitHub. O executável está compactado em um arquivo zip. Siga as instruções abaixo para configurar e utilizar o sistema:
 
-1. Navegue até a pasta `dist`.
-2. Execute o arquivo executável da aplicação.
+1. Baixe o arquivo zip contendo a distribuição do projeto no [GitHub Releases](https://github.com/mateusdoimo/app-robot-blockly/releases/tag/v1.0.0).
+2. Descompacte o arquivo zip em um diretório de sua escolha.
 
-3. Aguarde até que a aplicação seja completamente carregada no seu computador.
-4. Ligue o carrinho.
+3. Navegue até a pasta onde você descompactou os arquivos.
+4. Execute o arquivo executável da aplicação.
 
-5. No aplicativo, clique em "CONECTAR" no botão superior direito.
-6. Após estabelecer a conexão com o carrinho, o status na aplicação indicará "Conectado".
+5. Aguarde até que a aplicação seja completamente carregada no seu computador.
+6. Ligue o carrinho.
 
-7. Para enviar comandos, clique em "ENVIAR". Certifique-se de que o primeiro bloco seja sempre o bloco "INICIAR".
+7. No aplicativo, clique em "CONECTAR" no botão superior direito.
+8. Após estabelecer a conexão com o carrinho, o status na aplicação indicará "Conectado".
 
-Isso é tudo! Agora você está pronto para explorar e utilizar o nosso ambiente de aprendizagem de programação e robótica. 
+9. Para enviar comandos, clique em "ENVIAR". Certifique-se de que o primeiro bloco seja sempre o bloco "INICIAR".
+
 
 ## Contribuição
 
